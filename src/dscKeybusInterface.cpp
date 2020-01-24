@@ -433,8 +433,7 @@ void ICACHE_RAM_ATTR dscKeybusInterface::dscClockInterrupt() {
 
   // esp8266 timer1 calls dscDataInterrupt() directly as set in begin()
   #elif defined(ESP8266)
-  // Timer duration = (clockCyclesPerMicrosecond() / 16) * microseconds
-  timer1_write((clockCyclesPerMicrosecond() / 16) * 250);
+  timer1_write(1250);
   #endif
 
 
@@ -519,7 +518,7 @@ ISR(TIMER1_OVF_vect) {
 #endif
 
 
-// Interrupt function called by AVR Timer2 and esp8266 timer1 after 250us to read the data line
+// Interrupt function called by AVR Timer1 and esp8266 timer1 after 250us to read the data line
 #if defined(__AVR__)
 void dscKeybusInterface::dscDataInterrupt() {
 #elif defined(ESP8266)
